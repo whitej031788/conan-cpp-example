@@ -14,7 +14,6 @@ libjpeg-turbo/3.0.2
 zstd/1.5.6
 re2/20230301
 abseil/20240116.2
-protobuf/6.32.1
 c-ares/1.27.0
 
 [tool_requires]

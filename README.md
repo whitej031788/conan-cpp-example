@@ -54,7 +54,7 @@ Notes:
 
 ## Dependencies
 
-The Conan configuration (`conanfile.txt`) depends on a core set used by the app (fmt, spdlog, nlohmann_json, cpr, sqlite3, cxxopts) and a number of additional libraries (boost, libxml2, expat, libpng, libjpeg-turbo, zstd, re2, abseil, protobuf, c-ares) to increase the dependency graph for SCA tooling.
+The Conan configuration (`conanfile.txt`) depends on a core set used by the app (fmt, spdlog, nlohmann_json, cpr, sqlite3, cxxopts) and a number of additional libraries (boost, libxml2, expat, libpng, libjpeg-turbo, zstd, re2, abseil, c-ares) to increase the dependency graph for SCA tooling.
 
 If you want to explicitly introduce known vulnerable versions for SCA testing, you can edit `conanfile.txt` and pin an older version of certain libraries that historically had CVEs (e.g., specific older `expat`, `libtiff`, or `libcurl` versions), subject to their availability on ConanCenter. Example (not guaranteed to exist anymore):
 
