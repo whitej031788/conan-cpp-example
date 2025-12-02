@@ -1,4 +1,4 @@
-# Conan C++ Example (Dependency-Heavy CLI)
+# Conan C++ Example
 
 Sample C++17 application using Conan (v2) and CMake, intentionally pulling in a broad set of dependencies for SCA tooling validation. The app exposes three input-driven features (HTTP fetch, SQL execution, and JSON parsing) to exercise injection workflows.
 
