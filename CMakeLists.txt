@@ -12,7 +12,7 @@ find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(cpr REQUIRED)
-find_package(sqlite3 REQUIRED)
+find_package(SQLite3 REQUIRED)
 find_package(cxxopts REQUIRED)
 
 add_library(example_lib
@@ -32,7 +32,7 @@ target_link_libraries(example_lib
 		spdlog::spdlog
 		nlohmann_json::nlohmann_json
 		cpr::cpr
-		sqlite3::sqlite3
+		SQLite::SQLite3
 )
 
 add_executable(conan_cpp_example
