@@ -30,7 +30,7 @@ Notes (macOS):
 
 The workflow in `.github/workflows/build.yml`:
 - Installs Conan via pip
-- Creates a lockfile (`conan lock create ...`) to capture full graph incl. build requirements
+- Creates a lockfile from `conanfile.py` (`conan lock create conanfile.py ... --full-graph`) to capture full graph incl. build requirements
 - Installs with `--lockfile=conan.lock`
 - Configures with the Conan toolchain and builds under the Sonar build-wrapper
 
@@ -54,14 +54,14 @@ Notes:
 
 ## Dependencies
 
-The Conan configuration (`conanfile.txt`) depends on a core set used by the app (fmt, spdlog, nlohmann_json, cpr, sqlite3, cxxopts) and a number of additional libraries (boost, libxml2, expat, libpng, libjpeg-turbo, zstd, re2, abseil, c-ares) to increase the dependency graph for SCA tooling.
+The Conan recipe (`conanfile.py`) depends on a core set used by the app (fmt, spdlog, nlohmann_json, cpr, sqlite3, cxxopts) and a number of additional libraries (boost, libxml2, expat, libpng, libjpeg-turbo, zstd, re2, abseil, c-ares) to increase the dependency graph for SCA tooling.
 
-If you want to explicitly introduce known vulnerable versions for SCA testing, you can edit `conanfile.txt` and pin an older version of certain libraries that historically had CVEs (e.g., specific older `expat`, `libtiff`, or `libcurl` versions), subject to their availability on ConanCenter. Example (not guaranteed to exist anymore):
+If you want to explicitly introduce known vulnerable versions for SCA testing, you can edit `conanfile.py` and pin an older version of certain libraries that historically had CVEs (e.g., specific older `expat`, `libtiff`, or `libcurl` versions), subject to their availability on ConanCenter. Example (not guaranteed to exist anymore):
 
-```ini
-# In conanfile.txt -> [requires]
+```python
+# In conanfile.py -> requirements()
 # Replace expat version with an older one known to have CVEs
-expat/2.4.1
+self.requires("expat/2.4.1")
 ```
 
 If a pinned version is unavailable or conflicts with transitive deps, try a slightly newer vulnerable revision or adjust other versions to resolve constraints.
@@ -74,7 +74,7 @@ If a pinned version is unavailable or conflicts with transitive deps, try a slig
 - `src/json_utils.{h,cpp}` — JSON parsing/pretty-print
 - `include/cpp_example/version.h` — Version string
 - `CMakeLists.txt` — Build targets and links
-- `conanfile.txt` — Conan 2 configuration with many dependencies
+- `conanfile.py` — Conan 2 recipe with many dependencies
 
 ## Clean
 

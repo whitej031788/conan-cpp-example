@@ -28,7 +28,7 @@ jobs:
       - name: Create Conan lockfile
         run: |
           conan profile detect --force
-          conan lock create conanfile.txt -pr:h default -pr:b default -s build_type=Release --lockfile-out=conan.lock
+          conan lock create conanfile.py -pr:h default -pr:b default -s build_type=Release --full-graph --lockfile-out=conan.lock
       - name: Run Build Wrapper
         run: |
           rm -rf build
