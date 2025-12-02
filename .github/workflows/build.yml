@@ -25,11 +25,14 @@ jobs:
           pip install conan
       - name: Install Build Wrapper
         uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v6
+      - name: Create Conan lockfile
+        run: |
+          conan profile detect --force
+          conan lock create conanfile.txt -pr:h default -pr:b default -s build_type=Release --full-graph --lockfile-out=conan.lock
       - name: Run Build Wrapper
         run: |
           rm -rf build
-          conan profile detect --force
-          conan install . --output-folder=build --build=missing -s build_type=Release
+          conan install . --output-folder=build --build=missing -s build_type=Release --lockfile=conan.lock
           cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build --parallel
       - name: SonarQube Scan
