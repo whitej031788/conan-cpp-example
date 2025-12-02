@@ -8,17 +8,31 @@ Sample C++17 application using Conan (v2) and CMake, intentionally pulling in a 
 - CMake (optional if using the Conan-provided tool_require)
 - A compiler toolchain (e.g., clang or GCC, MSVC on Windows)
 
-## Build
+## Build (local macOS)
 
 ```bash
 # From repo root
+rm -rf build
 conan profile detect --force
 conan install . --output-folder=build --build=missing -s build_type=Release
-cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+# Optional: use Conan-provided tools on PATH
+# source build/conanbuild.sh
+cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -G Ninja
 cmake --build build --parallel
 ```
 
 The resulting binary is at `build/conan_cpp_example`.
+
+Notes (macOS):
+- If you don’t source the Conan env, make sure Ninja is installed: `brew install ninja`. To use Unix Makefiles instead, install Xcode CLT (`xcode-select --install`) and drop `-G Ninja`.
+
+## CI (Ubuntu GitHub Actions)
+
+The workflow in `.github/workflows/build.yml`:
+- Installs Conan via pip
+- Creates a lockfile (`conan lock create ...`) to capture full graph incl. build requirements
+- Installs with `--lockfile=conan.lock`
+- Configures with the Conan toolchain and builds under the Sonar build-wrapper
 
 ## Run
 
