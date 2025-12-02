@@ -5,7 +5,6 @@ nlohmann_json/3.11.3
 cpr/1.10.5
 sqlite3/3.46.0
 cxxopts/3.2.0
-# Extra dependencies to enlarge the graph for SCA testing
 boost/1.84.0
 libxml2/2.12.7
 expat/2.6.3
@@ -25,5 +24,3 @@ nasm/2.15.05
 CMakeDeps
 CMakeToolchain
 VirtualBuildEnv
-
-
