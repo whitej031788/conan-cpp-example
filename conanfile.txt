@@ -20,6 +20,7 @@ c-ares/1.27.0
 [tool_requires]
 cmake/4.2.0
 ninja/1.11.1
+nasm/2.15.05
 
 [generators]
 CMakeDeps
