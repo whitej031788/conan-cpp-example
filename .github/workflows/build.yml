@@ -33,8 +33,9 @@ jobs:
         run: |
           rm -rf build
           conan install . --output-folder=build --build=missing -s build_type=Release --lockfile=conan.lock
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build --parallel
+          source build/conanbuild.sh
+          cmake --preset conan-release
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset conan-release --parallel
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
