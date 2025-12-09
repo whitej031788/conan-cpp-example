@@ -51,3 +51,5 @@ jobs:
             -Dsonar.organization=sonarcloud-demos
             -Dsonar.projectName=conan-cpp-demo
             "-Dsonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
+            -Dsonar.verbose=true
+            -Dsonar.sca.debug=true

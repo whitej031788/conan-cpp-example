@@ -48,3 +48,5 @@ jobs:
           args: >
             -Dsonar.sca.cfamily=true 
             "-Dsonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
+            -Dsonar.verbose=true
+            -Dsonar.sca.debug=true
